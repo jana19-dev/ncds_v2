@@ -7,6 +7,7 @@ import {
   SEO,
   Sidebar,
   Topbar,
+  Footer,
   Desktop,
   Mobile
 } from '.'
@@ -47,6 +48,7 @@ class Layout extends React.Component {
             <div style={{ minHeight: '90vh', padding: '220px 10px 10px 10px' }}>
               {children}
             </div>
+            <Footer />
           </Desktop>
           <Mobile>
             <Sidebar activePage={activePage} open={sidebarOpen} toggleSidebar={sidebarOpen => this.setState({ sidebarOpen })} />
@@ -54,6 +56,7 @@ class Layout extends React.Component {
             <div style={{ minHeight: '90vh', padding: '150px 10px 10px 10px' }}>
               {children}
             </div>
+            <Footer />
           </Mobile>
         </div>
       </MuiThemeProvider>

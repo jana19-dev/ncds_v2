@@ -29,6 +29,7 @@ module.exports = {
         icon: `src/images/logo.png`
       }
     },
+    `gatsby-plugin-styled-components`,
     {
       resolve: 'gatsby-source-sanity',
       options: {
