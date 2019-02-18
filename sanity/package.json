@@ -1,0 +1,36 @@
+{
+  "name": "ncds",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Congratulations, you have now installed the Sanity Content Studio, an open source real-time content editing environment connected to the Sanity backend",
+  "main": "package.json",
+  "author": "NCDS ORG <nainativucds.org@gmail.com>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "sanity start",
+    "test": "sanity check"
+  },
+  "keywords": [
+    "sanity"
+  ],
+  "dependencies": {
+    "@sanity/base": "^0.140.8",
+    "@sanity/components": "^0.140.8",
+    "@sanity/core": "^0.140.8",
+    "@sanity/default-layout": "^0.140.8",
+    "@sanity/default-login": "^0.140.3",
+    "@sanity/desk-tool": "^0.140.8",
+    "@sanity/vision": "^0.140.8",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "standard": "^12.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jana-uoft/ncds_sanity.git"
+  }
+}

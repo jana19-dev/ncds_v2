@@ -1,0 +1,30 @@
+version: '3.3'
+
+services:
+  ncds_sanity:
+    build: .
+    image: ncds
+    container_name: ncds_sanity
+    working_dir: /app
+    volumes:
+      - ./sanity/:/app
+    user: 1000:1000
+    command: sh -c "yarn && yarn start"
+    network_mode: host
+    env_file:
+      - .env
+
+  ncds_gatsby:
+    build: .
+    image: ncds
+    container_name: ncds_gatsby
+    working_dir: /app
+    volumes:
+      - ./gatsby/:/app
+    user: 1000:1000
+    command: sh -c "yarn && yarn start"
+    network_mode: host
+    env_file:
+      - .env
+    depends_on:
+      - ncds_sanity
