@@ -1,3 +1,5 @@
+import RichTextEditor from '../components/RichTextEditor'
+
 const info = {
   title: 'Information',
   name: 'info',
@@ -11,12 +13,9 @@ const info = {
       validation: Rule => Rule.required()
     },
     {
-      title: 'Description',
+      type: 'string',
       name: 'description',
-      type: 'array',
-      of: [{
-        type: 'block'
-      }]
+      inputComponent: RichTextEditor
     }
   ]
 }

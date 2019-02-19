@@ -1,3 +1,5 @@
+import RichTextEditor from '../components/RichTextEditor'
+
 const publication = {
   title: 'Publications',
   name: 'publication',
@@ -20,12 +22,9 @@ const publication = {
       validation: Rule => Rule.required()
     },
     {
-      title: 'Description',
+      type: 'string',
       name: 'description',
-      type: 'array',
-      of: [{
-        type: 'block'
-      }]
+      inputComponent: RichTextEditor
     },
     {
       title: 'Images',
