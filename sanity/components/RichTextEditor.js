@@ -61,12 +61,13 @@ export default class RichTextEditor extends React.Component {
     this._inputElement.focus()
   }
 
-  handleChange = (html) => {
-    this.setState({ UserAnnouncements: html })
+  handleChange = (value) => {
+    if (value === '<p><br></p>' || value === '<p></p>') value = ''
+    this.props.onChange(createPatchFrom(value))
   }
 
   render () {
-    const { type, value = '', onChange } = this.props
+    const { type, value = '' } = this.props
     const { title } = type
 
     return (
@@ -79,8 +80,8 @@ export default class RichTextEditor extends React.Component {
           {title}
         </div>
         <ReactQuill
-          value={value}
-          onChange={html => onChange(createPatchFrom(html))}
+          defaultValue={value}
+          onChange={this.handleChange}
           modules={textEditorModules}
           formats={textEditorFormats}
           ref={element => this._inputElement = element}
