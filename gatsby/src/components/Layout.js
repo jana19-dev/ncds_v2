@@ -45,7 +45,7 @@ class Layout extends React.Component {
         <div style={{ backgroundPosition: 'center', backgroundSize: 'cover', minHeight: '100vh', minWidth: 400 }}>
           <Desktop>
             <Topbar title={title} activePage={activePage} />
-            <div style={{ minHeight: '90vh', padding: '220px 10px 10px 10px' }}>
+            <div style={{ minHeight: '100vh', padding: '220px 10px 10px 10px' }}>
               {children}
             </div>
             <Footer />
@@ -53,7 +53,7 @@ class Layout extends React.Component {
           <Mobile>
             <Sidebar activePage={activePage} open={sidebarOpen} toggleSidebar={sidebarOpen => this.setState({ sidebarOpen })} />
             <Topbar title={title} toggleSideBar={this.toggleSideBar} />
-            <div style={{ minHeight: '90vh', padding: '150px 10px 10px 10px' }}>
+            <div style={{ minHeight: '100vh', padding: '150px 10px 10px 10px' }}>
               {children}
             </div>
             <Footer />
