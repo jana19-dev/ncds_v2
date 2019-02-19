@@ -48,7 +48,7 @@ const textEditorFormats = [
   'color'
 ]
 
-const createPatchFrom = value => PatchEvent.from(value === '' ? unset() : set(value))
+const createPatchFrom = value => PatchEvent.from(set(value))
 
 export default class RichTextEditor extends React.Component {
   static propTypes = {
