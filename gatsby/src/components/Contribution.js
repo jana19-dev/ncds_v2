@@ -66,8 +66,8 @@ class Contribution extends Component {
             </Typography>
           </CardContent>
         </Collapse>
-        <CardActions style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', justifyItems: 'center', padding: 0 }}>
-          <Typography>{date}</Typography>
+        <CardActions style={{ display: 'grid', gridTemplateColumns: description ? '2fr 1fr' : '1fr', justifyItems: 'center', padding: 0 }}>
+          <Typography variant='body1'>{date}</Typography>
           {description &&
             <ExpandIconButton
               onClick={this.handleExpandClick}
