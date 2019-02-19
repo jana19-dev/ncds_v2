@@ -1,3 +1,5 @@
+import RichTextEditor from '../components/RichTextEditor'
+
 const gallery = {
   title: 'Galleries',
   name: 'gallery',
@@ -19,21 +21,6 @@ const gallery = {
       },
       validation: Rule => Rule.required()
     },
-    // {
-    //   title: 'Type',
-    //   name: 'type',
-    //   type: 'string',
-    //   options: {
-    //     list: [
-    //       { title: 'Nainativu', value: 'Nainativu' },
-    //       { title: 'Events', value: 'Events' },
-    //       { title: 'Theepam', value: 'Theepam' },
-    //       { title: 'Muthiyor', value: 'Muthiyor' },
-    //       { title: 'Ondrukoodal', value: 'Ondrukoodal' }
-    //     ],
-    //     layout: 'radio'
-    //   }
-    // },
     {
       title: 'Tags',
       name: 'tags',
@@ -47,12 +34,9 @@ const gallery = {
       validation: Rule => Rule.unique().error('Cannot have duplicate tags')
     },
     {
-      title: 'Description',
+      type: 'string',
       name: 'description',
-      type: 'array',
-      of: [{
-        type: 'block'
-      }]
+      inputComponent: RichTextEditor
     },
     {
       title: 'Images',

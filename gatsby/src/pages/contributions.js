@@ -1,14 +1,44 @@
 import React from 'react'
-import { Layout } from '../components'
+import { Layout, Contribution } from '../components'
+import { graphql } from 'gatsby'
 
-import Typography from '@material-ui/core/Typography'
+const ContributionsPage = ({ data }) => {
+  const { edges: contributions } = data.allSanityContribution
 
-const ContributionsPage = () => {
   return (
     <Layout title='அபிவிருத்திகள்' activePage='/contributions'>
-      <Typography variant='h5'>Contributions</Typography>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, 375px)',
+        gridGap: 20,
+        justifyContent: 'center'
+      }}>
+        {contributions.map(({ node }) =>
+          <Contribution key={node.id} contribution={node} />
+        )}
+      </div>
     </Layout>
   )
 }
 
 export default ContributionsPage
+
+export const query = graphql`
+  query AllContributions {
+    allSanityContribution {
+      edges {
+        node {
+          id,
+          title,
+          date (formatString: "MMMM Do, YYYY"),
+          description,
+          images {
+            asset {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+`
