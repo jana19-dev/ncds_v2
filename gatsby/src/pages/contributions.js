@@ -25,7 +25,12 @@ export default ContributionsPage
 
 export const query = graphql`
   query AllContributions {
-    allSanityContribution {
+    allSanityContribution(
+      sort: {
+        fields: [date]
+        order: DESC
+      }
+    ) {
       edges {
         node {
           id,
