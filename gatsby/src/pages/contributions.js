@@ -34,7 +34,10 @@ export const query = graphql`
           description,
           images {
             asset {
-              url
+              url,
+              fixed(height: 250) {
+                ...GatsbySanityImageFixed
+              }
             }
           }
         }
