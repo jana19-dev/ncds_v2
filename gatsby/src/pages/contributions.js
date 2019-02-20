@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout, Contribution } from '../components'
+import { Layout, CardComponent } from '../components'
 import { graphql } from 'gatsby'
 
 const ContributionsPage = ({ data }) => {
@@ -14,7 +14,7 @@ const ContributionsPage = ({ data }) => {
         justifyContent: 'center'
       }}>
         {contributions.map(({ node }) =>
-          <Contribution key={node.id} contribution={node} />
+          <CardComponent key={node.id} content={node} />
         )}
       </div>
     </Layout>
@@ -25,7 +25,12 @@ export default ContributionsPage
 
 export const query = graphql`
   query AllContributions {
-    allSanityContribution {
+    allSanityContribution(
+      sort: {
+        fields: [date]
+        order: DESC
+      }
+    ) {
       edges {
         node {
           id,
@@ -34,7 +39,10 @@ export const query = graphql`
           description,
           images {
             asset {
-              url
+              url,
+              fixed(height: 250) {
+                ...GatsbySanityImageFixed
+              }
             }
           }
         }

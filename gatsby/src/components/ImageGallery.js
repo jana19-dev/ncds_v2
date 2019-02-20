@@ -11,7 +11,7 @@ class ImageGallery extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      photoIndex: 0,
+      photoIndex: props.startIndex,
       slideShow: false
     }
   }
@@ -60,12 +60,14 @@ class ImageGallery extends Component {
 }
 
 ImageGallery.defaultProps = {
-  slideTimeout: 5000
+  slideTimeout: 5000,
+  startIndex: 0
 }
 
 ImageGallery.propTypes = {
   images: PropTypes.array.isRequired,
   slideTimeout: PropTypes.number,
+  startIndex: PropTypes.number,
   onClose: PropTypes.func.isRequired
 }
 
