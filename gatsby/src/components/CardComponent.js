@@ -21,7 +21,8 @@ import Img from 'gatsby-image'
 
 const StyledCardHeader = withStyles({
   title: {
-    color: 'white'
+    color: 'white',
+    fontSize: 20
   }
 })(CardHeader)
 
@@ -38,7 +39,7 @@ class CardComponent extends Component {
 
   componentDidMount = () => {
     let { slideShow, content, maxSlideShow } = this.props
-    if (slideShow && content.images.length > 1) {
+    if (slideShow && content.images && content.images.length > 1) {
       if (!maxSlideShow || maxSlideShow > content.images.length) maxSlideShow = content.images.length
       this.coverImageTimer = setInterval(() => {
         const completed = this.state.completed + 10
@@ -54,7 +55,7 @@ class CardComponent extends Component {
 
   componentWillUnmount = () => {
     const { slideShow, content } = this.props
-    if (slideShow && content.images.length > 1) {
+    if (slideShow && content.images && content.images.length > 1) {
       clearInterval(this.coverImageTimer)
     }
   }
@@ -77,6 +78,7 @@ class CardComponent extends Component {
       deathDate
     } = this.props.content
 
+    const { alwaysExpanded } = this.props
     const { isCardExpanded, isGalleryOpen, index, completed } = this.state
 
     const ExpandIconButton = withStyles(({
@@ -85,32 +87,41 @@ class CardComponent extends Component {
       }
     }))(IconButton)
 
-    const imageURLs = images ? images.map(image => image.asset.url) : []
+    const imageURLs = images ? images.map(image => image.asset.url) : [image.asset.url]
 
     let slideShow = this.props.slideShow && imageURLs.length > 1
+    let cardMediaImage = image ? image.asset.fixed : images[index].asset.fixed
 
     return (
-      <Card style={{ height: 'fit-content', background: teal[800] }}>
+      <Card style={{ background: teal[800] }}>
         <StyledCardHeader title={title || name} />
         {slideShow && <LinearProgress variant='determinate' color='secondary' value={completed} />}
         <CardActionArea onClick={() => this.setState({ isGalleryOpen: true })}>
           <CardMedia
-            component={() => <Img fixed={this.props.content.images[index].asset.fixed} />}
+            component={() => <Img fixed={cardMediaImage} />}
             alt={title || name}
-            src={image || imageURLs[index]}
+            src={imageURLs[index]}
             title={title || name}
           />
         </CardActionArea>
-        <Collapse in={isCardExpanded} timeout='auto' unmountOnExit>
-          <CardContent>
-            <Typography component='div' style={{ color: 'white' }}>
+        <Collapse in={alwaysExpanded || isCardExpanded} timeout='auto' unmountOnExit>
+          <CardContent style={{ paddingTop: 0 }}>
+            {(birthDate || deathDate) &&
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', justifyItems: 'center' }}>
+                <Typography style={{ color: 'white' }} variant='h6'>மலர்வு</Typography>
+                <Typography style={{ color: 'white' }} variant='h6'>நினைவு</Typography>
+                <Typography style={{ color: 'white', fontWeight: 'bold' }} variant='body1'>{birthDate || 'Unknown'}</Typography>
+                <Typography style={{ color: 'white', fontWeight: 'bold' }} variant='body1'>{deathDate}</Typography>
+              </div>
+            }
+            <Typography component='div' style={{ color: 'white', textAlign: 'center' }}>
               {ReactHtmlParser(description)}
             </Typography>
           </CardContent>
         </Collapse>
         <CardActions style={{ display: 'grid', gridTemplateColumns: description ? '2fr 1fr' : '1fr', justifyItems: 'center', padding: 0 }}>
           <Typography variant='body1' style={{ color: 'white' }}>{date}</Typography>
-          {description &&
+          {!alwaysExpanded && description &&
             <ExpandIconButton
               onClick={this.handleExpandClick}
               aria-expanded={this.state.isCardExpanded}
@@ -123,7 +134,7 @@ class CardComponent extends Component {
 
         {isGalleryOpen && (
           <ImageGallery
-            images={image || imageURLs}
+            images={imageURLs}
             onClose={() => this.setState({ isGalleryOpen: false })}
             slideTimeout={5000}
             startIndex={index}
@@ -135,13 +146,15 @@ class CardComponent extends Component {
 }
 
 CardComponent.defaultProps = {
-  slideShow: true
+  slideShow: true,
+  alwaysExpanded: false
 }
 
 CardComponent.propTypes = {
   content: PropTypes.object.isRequired,
   slideShow: PropTypes.bool,
-  maxSlideShow: PropTypes.number
+  maxSlideShow: PropTypes.number,
+  alwaysExpanded: PropTypes.bool
 }
 
 export default CardComponent

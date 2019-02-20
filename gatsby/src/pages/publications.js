@@ -25,7 +25,7 @@ export default PublicationsPage
 
 export const query = graphql`
   query AllPublications {
-    allSanityPublication(
+    allSanityPublication (
       sort: {
         fields: [date]
         order: DESC
