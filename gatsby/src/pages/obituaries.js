@@ -14,7 +14,7 @@ const ObituariesPage = ({ data }) => {
         justifyContent: 'center'
       }}>
         {obituaries.map(({ node }) =>
-          <CardComponent key={node.id} content={node} alwaysExpanded />
+          <CardComponent key={node.id} content={node} />
         )}
       </div>
     </Layout>
