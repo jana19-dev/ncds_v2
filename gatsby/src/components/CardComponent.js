@@ -5,11 +5,7 @@ import {
   Card,
   CardHeader,
   CardActionArea,
-  CardActions,
   CardContent,
-  Collapse,
-  IconButton,
-  Icon,
   Typography,
   LinearProgress
 } from '@material-ui/core'
@@ -22,8 +18,9 @@ const StyledCardHeader = withStyles({
   title: {
     color: 'white',
     textAlign: 'center',
-    fontSize: 20,
-    fontWeight: 'bold'
+    fontSize: 16,
+    fontWeight: 'bold',
+    height: 25
   }
 })(CardHeader)
 
@@ -80,14 +77,7 @@ class CardComponent extends Component {
       deathDate
     } = this.props.content
 
-    const { alwaysExpanded } = this.props
-    const { isCardExpanded, isGalleryOpen, index, completed } = this.state
-
-    const ExpandIconButton = withStyles(({
-      root: {
-        transform: isCardExpanded ? 'rotate(180deg)' : 'rotate(0deg)'
-      }
-    }))(IconButton)
+    const { isGalleryOpen, index, completed } = this.state
 
     const imageURLs = images ? images.map(image => image.asset.url) : [image.asset.url]
 
@@ -95,45 +85,40 @@ class CardComponent extends Component {
     let cardMediaImage = image ? image.asset.fixed : images[index].asset.fixed
 
     return (
-      <Card style={{ background: teal[800] }}>
+      <Card style={{ background: teal[800], height: 'fit-content' }}>
         <StyledCardHeader title={title || name} />
         {slideShow && <LinearProgress variant='determinate' color='secondary' value={completed} />}
         <CardActionArea onClick={() => this.setState({ isGalleryOpen: true })}>
           <Img fixed={cardMediaImage} />
         </CardActionArea>
-        <Collapse in={alwaysExpanded || isCardExpanded} timeout='auto' unmountOnExit>
-          <CardContent style={{ paddingTop: 0 }}>
-            {(birthDate || deathDate) &&
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', justifyItems: 'center' }}>
-                <Typography style={{ color: 'white' }} variant='h6'>மலர்வு</Typography>
-                <Typography style={{ color: 'white' }} variant='h6'>நினைவு</Typography>
-                <Typography style={{ color: 'white', fontWeight: 'bold' }} variant='body1'>{birthDate || 'Unknown'}</Typography>
-                <Typography style={{ color: 'white', fontWeight: 'bold' }} variant='body1'>{deathDate}</Typography>
-              </div>
-            }
-            {(startTime || endTime) &&
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr', justifyItems: 'center' }}>
-                <Typography style={{ color: 'white' }} variant='h6'> {startDate} </Typography>
-                <Typography style={{ color: 'white' }} variant='h6'>{startTime} to {endTime} </Typography>
-              </div>
-            }
-            <Typography component='div' style={{ color: 'white', textAlign: 'center', maxHeight: 150, overflowY: 'auto' }}>
-              {ReactHtmlParser(description)}
-            </Typography>
-          </CardContent>
-        </Collapse>
-        <CardActions style={{ display: 'grid', gridTemplateColumns: description ? '2fr 1fr' : '1fr', justifyItems: 'center', padding: 0 }}>
-          <Typography variant='body1' style={{ color: 'white' }}>{date}</Typography>
-          {!alwaysExpanded && description &&
-            <ExpandIconButton
-              onClick={this.handleExpandClick}
-              aria-expanded={this.state.isCardExpanded}
-              aria-label='Show more'
-            >
-              <Icon>expand_more</Icon>
-            </ExpandIconButton>
+        <CardContent>
+          {!startTime && !deathDate &&
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr', justifyItems: 'center' }}>
+              <Typography variant='body1' style={{ color: 'white' }}>{date}</Typography>
+            </div>
           }
-        </CardActions>
+          {(birthDate || deathDate) &&
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', justifyItems: 'center' }}>
+              <Typography style={{ color: 'white' }} variant='h6'>மலர்வு</Typography>
+              <Typography style={{ color: 'white' }} variant='h6'>நினைவு</Typography>
+              <Typography style={{ color: 'white', fontWeight: 'bold' }} variant='body1'>{birthDate || 'Unknown'}</Typography>
+              <Typography style={{ color: 'white', fontWeight: 'bold' }} variant='body1'>{deathDate}</Typography>
+            </div>
+          }
+          {(startTime || endTime) &&
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr', justifyItems: 'center' }}>
+              <Typography style={{ color: 'white' }} variant='h6'> {startDate} </Typography>
+              <Typography style={{ color: 'white' }} variant='h6'>
+                {new Date(startTime).toLocaleString('en-US', { timeZone: 'America/Toronto' }).split(', ')[1]}
+                &nbsp;to&nbsp;
+                {new Date(endTime).toLocaleString('en-US', { timeZone: 'America/Toronto' }).split(', ')[1]}
+              </Typography>
+            </div>
+          }
+          <Typography component='div' style={{ color: 'white', textAlign: 'center', maxHeight: 150, overflowY: 'auto' }}>
+            {ReactHtmlParser(description)}
+          </Typography>
+        </CardContent>
 
         {isGalleryOpen && (
           <ImageGallery
@@ -149,15 +134,13 @@ class CardComponent extends Component {
 }
 
 CardComponent.defaultProps = {
-  slideShow: true,
-  alwaysExpanded: false
+  slideShow: true
 }
 
 CardComponent.propTypes = {
   content: PropTypes.object.isRequired,
   slideShow: PropTypes.bool,
-  maxSlideShow: PropTypes.number,
-  alwaysExpanded: PropTypes.bool
+  maxSlideShow: PropTypes.number
 }
 
 export default CardComponent

@@ -17,7 +17,8 @@ const event = {
       type: 'datetime',
       default: Date.now(),
       options: {
-        timeStep: 30
+        timeStep: 30,
+        timeFormat: 'LT'
       },
       validation: Rule => Rule.required()
     },
@@ -27,7 +28,8 @@ const event = {
       type: 'datetime',
       default: Date.now(),
       options: {
-        timeStep: 30
+        timeStep: 30,
+        timeFormat: 'LT'
       },
       validation: Rule => Rule.required()
     },
