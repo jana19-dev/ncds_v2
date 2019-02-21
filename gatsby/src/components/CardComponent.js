@@ -7,7 +7,6 @@ import {
   CardActionArea,
   CardActions,
   CardContent,
-  CardMedia,
   Collapse,
   IconButton,
   Icon,
@@ -97,12 +96,7 @@ class CardComponent extends Component {
         <StyledCardHeader title={title || name} />
         {slideShow && <LinearProgress variant='determinate' color='secondary' value={completed} />}
         <CardActionArea onClick={() => this.setState({ isGalleryOpen: true })}>
-          <CardMedia
-            component={() => <Img fixed={cardMediaImage} />}
-            alt={title || name}
-            src={imageURLs[index]}
-            title={title || name}
-          />
+          <Img fixed={cardMediaImage} />
         </CardActionArea>
         <Collapse in={alwaysExpanded || isCardExpanded} timeout='auto' unmountOnExit>
           <CardContent style={{ paddingTop: 0 }}>
