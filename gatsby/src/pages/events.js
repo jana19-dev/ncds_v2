@@ -77,8 +77,8 @@ export const query = graphql`
           title,
           endDate: endTime,
           startDate: startTime (formatString: "dddd, MMMM Do YYYY"),
-          startTime (formatString: "h:mm a"),
-          endTime (formatString: "h:mm a"),
+          startTime (formatString: "LT"),
+          endTime (formatString: "LT"),
           description,
           image {
             asset {
