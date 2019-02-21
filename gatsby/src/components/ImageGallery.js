@@ -38,6 +38,8 @@ class ImageGallery extends Component {
     const { images } = this.props
     const { photoIndex } = this.state
 
+    const isSingleImage = images.length === 1
+
     const slideShowIcon = (
       <IconButton aria-label='Play/Pause' onClick={this.toggleSlideShow} style={{ color: 'white' }}>
         <Icon> {this.state.slideShow ? 'pause' : 'play_arrow' } </Icon>
@@ -47,12 +49,12 @@ class ImageGallery extends Component {
     return (
       <Lightbox
         mainSrc={images[photoIndex]}
-        nextSrc={images[(photoIndex + 1) % images.length]}
-        prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+        nextSrc={!isSingleImage ? images[(photoIndex + 1) % images.length] : null}
+        prevSrc={!isSingleImage ? images[(photoIndex + images.length - 1) % images.length] : null}
         onCloseRequest={this.onClose}
         onMovePrevRequest={() => this.setState({ photoIndex: (photoIndex + images.length - 1) % images.length })}
         onMoveNextRequest={() => this.setState({ photoIndex: (photoIndex + 1) % images.length })}
-        toolbarButtons={[slideShowIcon]}
+        toolbarButtons={!isSingleImage ? [slideShowIcon] : []}
         reactModalStyle={{ overlay: { zIndex: 1100 } }}
       />
     )
