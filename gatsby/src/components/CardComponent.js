@@ -114,7 +114,11 @@ class CardComponent extends Component {
             {(startTime || endTime) &&
               <div style={{ display: 'grid', gridTemplateColumns: '1fr', justifyItems: 'center' }}>
                 <Typography style={{ color: 'white' }} variant='h6'> {startDate} </Typography>
-                <Typography style={{ color: 'white' }} variant='h6'>{startTime} to {endTime} </Typography>
+                <Typography style={{ color: 'white' }} variant='h6'>
+                  {new Date(startTime).toLocaleString('en-US', { timeZone: 'America/Toronto' }).split(', ')[1]}
+                  &nbsp;to&nbsp;
+                  {new Date(endTime).toLocaleString('en-US', { timeZone: 'America/Toronto' }).split(', ')[1]}
+                </Typography>
               </div>
             }
             <Typography component='div' style={{ color: 'white', textAlign: 'center', maxHeight: 150, overflowY: 'auto' }}>
