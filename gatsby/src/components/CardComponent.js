@@ -7,7 +7,6 @@ import {
   CardActionArea,
   CardActions,
   CardContent,
-  CardMedia,
   Collapse,
   IconButton,
   Icon,
@@ -22,7 +21,9 @@ import Img from 'gatsby-image'
 const StyledCardHeader = withStyles({
   title: {
     color: 'white',
-    fontSize: 20
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold'
   }
 })(CardHeader)
 
@@ -72,6 +73,7 @@ class CardComponent extends Component {
       description,
       image,
       images,
+      startDate,
       startTime,
       endTime,
       birthDate,
@@ -97,12 +99,7 @@ class CardComponent extends Component {
         <StyledCardHeader title={title || name} />
         {slideShow && <LinearProgress variant='determinate' color='secondary' value={completed} />}
         <CardActionArea onClick={() => this.setState({ isGalleryOpen: true })}>
-          <CardMedia
-            component={() => <Img fixed={cardMediaImage} />}
-            alt={title || name}
-            src={imageURLs[index]}
-            title={title || name}
-          />
+          <Img fixed={cardMediaImage} />
         </CardActionArea>
         <Collapse in={alwaysExpanded || isCardExpanded} timeout='auto' unmountOnExit>
           <CardContent style={{ paddingTop: 0 }}>
@@ -114,7 +111,13 @@ class CardComponent extends Component {
                 <Typography style={{ color: 'white', fontWeight: 'bold' }} variant='body1'>{deathDate}</Typography>
               </div>
             }
-            <Typography component='div' style={{ color: 'white', textAlign: 'center' }}>
+            {(startTime || endTime) &&
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr', justifyItems: 'center' }}>
+                <Typography style={{ color: 'white' }} variant='h6'> {startDate} </Typography>
+                <Typography style={{ color: 'white' }} variant='h6'>{startTime} to {endTime} </Typography>
+              </div>
+            }
+            <Typography component='div' style={{ color: 'white', textAlign: 'center', maxHeight: 150, overflowY: 'auto' }}>
               {ReactHtmlParser(description)}
             </Typography>
           </CardContent>

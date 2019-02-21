@@ -54,10 +54,10 @@ const event = {
   },
   orderings: [
     {
-      title: 'End Time',
-      name: 'endTime',
+      title: 'Start Time',
+      name: 'startTime',
       by: [
-        { field: 'endTime', direction: 'desc' }
+        { field: 'startTime', direction: 'asc' }
       ]
     }
   ]
