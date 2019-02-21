@@ -21,7 +21,9 @@ import Img from 'gatsby-image'
 const StyledCardHeader = withStyles({
   title: {
     color: 'white',
-    fontSize: 20
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold'
   }
 })(CardHeader)
 
@@ -71,6 +73,7 @@ class CardComponent extends Component {
       description,
       image,
       images,
+      startDate,
       startTime,
       endTime,
       birthDate,
@@ -108,7 +111,13 @@ class CardComponent extends Component {
                 <Typography style={{ color: 'white', fontWeight: 'bold' }} variant='body1'>{deathDate}</Typography>
               </div>
             }
-            <Typography component='div' style={{ color: 'white', textAlign: 'center' }}>
+            {(startTime || endTime) &&
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr', justifyItems: 'center' }}>
+                <Typography style={{ color: 'white' }} variant='h6'> {startDate} </Typography>
+                <Typography style={{ color: 'white' }} variant='h6'>{startTime} to {endTime} </Typography>
+              </div>
+            }
+            <Typography component='div' style={{ color: 'white', textAlign: 'center', maxHeight: 150, overflowY: 'auto' }}>
               {ReactHtmlParser(description)}
             </Typography>
           </CardContent>
