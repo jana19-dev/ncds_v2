@@ -61,14 +61,14 @@ class NewsComponent extends Component {
   onNext = () => this.props.callNext()
 
   render () {
-    const { isoDate, title, link, media } = this.props.news
+    const { pubDate, title, link, media } = this.props.news
     const { loading } = this.state
     const { open } = this.props
 
     return (
       <div>
         <StyledCard onClick={() => this.props.openModal(this.props.idx)}>
-          <StyledCardHeader title={isoDate} />
+          <StyledCardHeader title={new Date(pubDate).toLocaleString('en-US', { timeZone: 'America/Toronto' })} />
           <CardActionArea>
             <CardMedia
               component='img'
