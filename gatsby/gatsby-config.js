@@ -38,6 +38,18 @@ module.exports = {
         token: process.env.GATSBY_SANITY_TOKEN,
         watchMode: true
       }
+    },
+    {
+      resolve: `gatsby-source-rss-feed`,
+      options: {
+        url: `http://www.jvpnews.com/rss.xml`,
+        name: `JVPNews`,
+        parserOption: {
+          customFields: {
+            item: ['media:thumbnail']
+          }
+        }
+      }
     }
     // 'gatsby-plugin-offline',
   ]
