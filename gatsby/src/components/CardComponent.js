@@ -14,6 +14,16 @@ import ReactHtmlParser from 'react-html-parser'
 import { teal } from '@material-ui/core/colors'
 import Img from 'gatsby-image'
 
+const StyledCard = withStyles({
+  root: {
+    background: teal[700],
+    height: 'fit-content',
+    '&:hover': {
+      backgroundColor: `${teal[900]}`
+    }
+  }
+})(Card)
+
 const StyledCardHeader = withStyles({
   title: {
     color: 'white',
@@ -85,7 +95,7 @@ class CardComponent extends Component {
     let cardMediaImage = image ? image.asset.fixed : images[index].asset.fixed
 
     return (
-      <Card style={{ background: teal[800], height: 'fit-content' }}>
+      <StyledCard>
         <StyledCardHeader title={title || name} />
         {slideShow && <LinearProgress variant='determinate' color='secondary' value={completed} />}
         <CardActionArea onClick={() => this.setState({ isGalleryOpen: true })}>
@@ -128,7 +138,7 @@ class CardComponent extends Component {
             startIndex={index}
           />
         )}
-      </Card>
+      </StyledCard>
     )
   }
 }
