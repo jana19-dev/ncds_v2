@@ -66,7 +66,7 @@ export const query = graphql`
       edges {
         node {
           id,
-          isoDate (formatString: "dddd, MMMM Do hh:mm A"),
+          pubDate,
           title,
           link,
           media {
