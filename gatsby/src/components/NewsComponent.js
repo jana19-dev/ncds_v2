@@ -60,6 +60,20 @@ class NewsComponent extends Component {
     const { loading } = this.state
     const { open } = this.props
 
+    const navigation = (
+      <DialogActions style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
+        <Button onClick={this.onPrev} variant='contained' color='primary'>
+          Prev
+        </Button>
+        <Button onClick={this.onClose} variant='contained' color='secondary'>
+          Close
+        </Button>
+        <Button onClick={this.onNext} variant='contained' color='primary'>
+          Next
+        </Button>
+      </DialogActions>
+    )
+
     return (
       <div>
         <StyledCard onClick={() => this.props.openModal(this.props.idx)}>
@@ -79,20 +93,11 @@ class NewsComponent extends Component {
           </CardContent>
         </StyledCard>
         <StyledDialog open={open} scroll='paper' disableBackdropClick onClose={this.onClose} fullScreen>
-          <DialogActions style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
-            <Button onClick={this.onPrev} variant='contained' color='primary'>
-              Prev
-            </Button>
-            <Button onClick={this.onClose} variant='contained' color='secondary'>
-              Close
-            </Button>
-            <Button onClick={this.onNext} variant='contained' color='primary'>
-              Next
-            </Button>
-          </DialogActions>
+          {navigation}
           <DialogContent style={{ textAlign: 'center', overflowY: 'hidden', padding: '5px 5px' }}>
             {loading && <CircularProgress color='secondary' />}
             <iframe
+              title={link}
               src={link}
               width='100%'
               height='100%'
@@ -102,6 +107,7 @@ class NewsComponent extends Component {
               marginWidth='0'
             />
           </DialogContent>
+          {navigation}
         </StyledDialog>
       </div>
     )

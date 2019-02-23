@@ -29,7 +29,7 @@ const StyledCardHeader = withStyles({
     color: 'white',
     textAlign: 'center',
     fontSize: 16,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     height: 25
   }
 })(CardHeader)

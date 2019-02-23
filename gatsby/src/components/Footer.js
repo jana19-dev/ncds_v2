@@ -29,7 +29,7 @@ class Footer extends Component {
         <Image src='footer.jpg' width='400px' />
         <div style={{ background: '#333333', textAlign: 'center' }}>
           <Typography style={{ color: 'white' }} variant='body1'>
-            Copyrights © 2018 All Rights Reserved by NainativuCDS.org
+            Copyrights © 2019 All Rights Reserved by NainativuCDS.org
           </Typography>
           <Typography style={{ color: 'white' }} variant='body1'>
             <a style={{ color: 'inherit', textDecoration: 'none' }} href='https://jana19.org' rel='noopener noreferrer' target='_blank'>
