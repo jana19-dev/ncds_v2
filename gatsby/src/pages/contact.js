@@ -23,13 +23,6 @@ const Main = styled.div`
   grid-gap: 20px;
   justify-content: center;
 `
-const Form = styled.form`
-  display: grid;
-  padding: 20px;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
-  margin: '0px auto';
-`
 
 const ContactDetails = styled.div`
   display: grid;
@@ -108,13 +101,20 @@ class ContactPage extends Component {
               <Typography style={{ color: 'white' }} variant='body2' component='div'>{ReactHtmlParser(members)}</Typography>
             </ContactCard>
           </ContactDetails>
-          <Form
+          <form
             name='contact'
             method='post'
             action='/contact/'
             data-netlify='true'
             data-netlify-honeypot='bot-field'
             onSubmit={this.handleSubmit}
+            style={{
+              display: 'grid',
+              padding: '20px',
+              gridTemplateColumns: '1fr 1fr',
+              gridGap: 20,
+              justifyItems: 'center'
+            }}
           >
             <input type='hidden' name='form-name' value='contact' />
             <TextField
@@ -154,15 +154,16 @@ class ContactPage extends Component {
               type='submit'
               color='primary'
               disabled={this.props.loading}
+              fullWidth
             >
               Send
               <Icon style={{ marginLeft: 5 }}>save</Icon>
             </Button>
-            <Button variant='contained' color='secondary' type='reset' onClick={this.clearForm}>
+            <Button variant='contained' color='secondary' type='reset' onClick={this.clearForm} fullWidth>
               Clear
               <Icon style={{ marginLeft: 5 }}>cancel</Icon>
             </Button>
-          </Form>
+          </form>
           <Dialog
             open={this.state.responseMessage !== ''}
             onClose={this.clearForm}
