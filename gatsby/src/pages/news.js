@@ -5,15 +5,20 @@ import { graphql } from 'gatsby'
 export default class NewsPage extends Component {
   constructor (props) {
     super(props)
+    const { allFeedJvpNews } = props.data
+    const { allFeedCineNews } = props.data
+    const { allFeedLankasriNews } = props.data
+    const { allFeedCanadaNews } = props.data
+    const newsItems = [
+      ...allFeedJvpNews.edges,
+      ...allFeedCineNews.edges,
+      ...allFeedLankasriNews.edges,
+      ...allFeedCanadaNews.edges
+    ].sort((a, b) => new Date(b.node.pubDate) - new Date(a.node.pubDate))
     this.state = {
       currentlyOpen: -1,
-      newsItems: [
-        ...props.data.allFeedJvpNews.edges,
-        ...props.data.allFeedCineNews.edges,
-        ...props.data.allFeedLankasriNews.edges,
-        ...props.data.allFeedCanadaNews.edges
-      ].sort((a, b) => new Date(b.node.pubDate) - new Date(a.node.pubDate)),
-      totalItems: props.data.allFeedJvpNews.edges.length
+      newsItems,
+      totalItems: newsItems.length
     }
   }
 
