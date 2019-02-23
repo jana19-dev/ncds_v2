@@ -17,6 +17,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-material-ui`,
     `gatsby-plugin-styled-components`,
     {
       resolve: 'gatsby-source-sanity',

@@ -81,7 +81,7 @@ class DonationPage extends Component {
     return (
       <Layout title='நிதி' activePage='/donation'>
         <Main>
-          <Typography style={{ textAlign: 'center' }} variant='h6'>Send us an a message regarding Donations and Scholarships</Typography>
+          <Typography style={{ textAlign: 'center' }} variant='h6'>Send us a message regarding Donations and Scholarships</Typography>
           <DonationDetails>
             <DonationCard elevation={24}>
               <Icon style={{ fontSize: 65, color: 'white' }}> attach_money </Icon>
