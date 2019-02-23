@@ -43,7 +43,43 @@ module.exports = {
       resolve: `gatsby-source-rss-feed`,
       options: {
         url: `http://www.jvpnews.com/rss.xml`,
-        name: `JVPNews`,
+        name: `JvpNews`,
+        parserOption: {
+          customFields: {
+            item: ['media:thumbnail']
+          }
+        }
+      }
+    },
+    {
+      resolve: `gatsby-source-rss-feed`,
+      options: {
+        url: `http://www.cineulagam.com/rss.xml`,
+        name: `CineNews`,
+        parserOption: {
+          customFields: {
+            item: ['media:thumbnail']
+          }
+        }
+      }
+    },
+    {
+      resolve: `gatsby-source-rss-feed`,
+      options: {
+        url: `http://news.lankasri.com/rss.xml`,
+        name: `LankasriNews`,
+        parserOption: {
+          customFields: {
+            item: ['media:thumbnail']
+          }
+        }
+      }
+    },
+    {
+      resolve: `gatsby-source-rss-feed`,
+      options: {
+        url: `http://www.canadamirror.com/rss.xml`,
+        name: `CanadaNews`,
         parserOption: {
           customFields: {
             item: ['media:thumbnail']

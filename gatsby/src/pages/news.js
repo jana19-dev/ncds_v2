@@ -7,18 +7,28 @@ export default class NewsPage extends Component {
     super(props)
     this.state = {
       currentlyOpen: -1,
+      newsItems: [
+        ...props.data.allFeedJvpNews.edges,
+        ...props.data.allFeedCineNews.edges,
+        ...props.data.allFeedLankasriNews.edges,
+        ...props.data.allFeedCanadaNews.edges
+      ],
       totalItems: props.data.allFeedJvpNews.edges.length
     }
   }
 
-  callNext = () => {
-    const { currentlyOpen, totalItems } = this.state
-    this.setState({ currentlyOpen: (currentlyOpen + 1) % totalItems })
+  callPrev = () => {
+    let { currentlyOpen } = this.state
+    if (currentlyOpen === 0) currentlyOpen = -1
+    else currentlyOpen -= 1
+    this.setState({ currentlyOpen })
   }
 
-  callPrev = () => {
-    const { currentlyOpen, totalItems } = this.state
-    this.setState({ currentlyOpen: (currentlyOpen - 1) % totalItems })
+  callNext= () => {
+    let { currentlyOpen, totalItems } = this.state
+    if (currentlyOpen === totalItems - 1) currentlyOpen = -1
+    else currentlyOpen += 1
+    this.setState({ currentlyOpen })
   }
 
   openModal = currentlyOpen => this.setState({ currentlyOpen })
@@ -26,8 +36,7 @@ export default class NewsPage extends Component {
   closeModal = () => this.setState({ currentlyOpen: -1 })
 
   render () {
-    const { edges: newsJVP } = this.props.data.allFeedJvpNews
-    const { currentlyOpen } = this.state
+    const { currentlyOpen, newsItems } = this.state
 
     return (
       <Layout title='செய்திகள்' activePage='/news'>
@@ -37,7 +46,7 @@ export default class NewsPage extends Component {
           gridGap: 20,
           justifyContent: 'center'
         }}>
-          {newsJVP.map(({ node }, idx) =>
+          {newsItems.sort((a, b) => new Date(b.node.pubDate) - new Date(a.node.pubDate)).map(({ node }, idx) =>
             <NewsComponent
               key={node.id}
               news={node}
@@ -58,6 +67,72 @@ export default class NewsPage extends Component {
 export const query = graphql`
   query AllNews {
     allFeedJvpNews(
+      sort: {
+        fields: [isoDate]
+        order: DESC
+      }
+    ) {
+      edges {
+        node {
+          id,
+          pubDate,
+          title,
+          link,
+          media {
+            thumbnail {
+              attrs{
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+    allFeedCineNews(
+      sort: {
+        fields: [isoDate]
+        order: DESC
+      }
+    ) {
+      edges {
+        node {
+          id,
+          pubDate,
+          title,
+          link,
+          media {
+            thumbnail {
+              attrs{
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+    allFeedLankasriNews(
+      sort: {
+        fields: [isoDate]
+        order: DESC
+      }
+    ) {
+      edges {
+        node {
+          id,
+          pubDate,
+          title,
+          link,
+          media {
+            thumbnail {
+              attrs{
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+    allFeedCanadaNews(
       sort: {
         fields: [isoDate]
         order: DESC
