@@ -17,18 +17,6 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `ncds`,
-        short_name: `ncds`,
-        start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/images/favicon.png`
-      }
-    },
     `gatsby-plugin-styled-components`,
     {
       resolve: 'gatsby-source-sanity',
@@ -85,6 +73,18 @@ module.exports = {
             item: ['media:thumbnail']
           }
         }
+      }
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `ncds`,
+        short_name: `ncds`,
+        start_url: `/`,
+        background_color: `#663399`,
+        theme_color: `#663399`,
+        display: `minimal-ui`,
+        icon: `src/images/favicon.png`
       }
     }
     // 'gatsby-plugin-offline',
