@@ -32,7 +32,7 @@ class TestingPage extends React.Component {
     e.preventDefault()
     this.setState({ loading: true }, () => {
       const { name, email, message } = this.state
-      fetch('/', {
+      fetch('/contact/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: encode({
