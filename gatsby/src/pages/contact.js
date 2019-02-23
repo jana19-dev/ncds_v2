@@ -100,12 +100,12 @@ class ContactPage extends Component {
             <ContactCard elevation={24}>
               <Icon style={{ fontSize: 65, color: 'white' }}> people </Icon>
               <Typography style={{ color: 'white' }} variant='h6'>Our Members</Typography>
-              <Typography style={{ color: 'white' }} variant='body1' component='div'>{ReactHtmlParser(contacts)}</Typography>
+              <Typography style={{ color: 'white' }} variant='body2' component='div'>{ReactHtmlParser(contacts)}</Typography>
             </ContactCard>
             <ContactCard elevation={24}>
               <Icon style={{ fontSize: 65, color: 'white' }}> location_on </Icon>
               <Typography style={{ color: 'white' }} variant='h6'>Contact Details</Typography>
-              <Typography style={{ color: 'white' }} variant='body1' component='div'>{ReactHtmlParser(members)}</Typography>
+              <Typography style={{ color: 'white' }} variant='body2' component='div'>{ReactHtmlParser(members)}</Typography>
             </ContactCard>
           </ContactDetails>
           <Form
@@ -155,7 +155,7 @@ class ContactPage extends Component {
               color='primary'
               disabled={this.props.loading}
             >
-              Send Message
+              Send
               <Icon style={{ marginLeft: 5 }}>save</Icon>
             </Button>
             <Button variant='contained' color='secondary' type='reset' onClick={this.clearForm}>

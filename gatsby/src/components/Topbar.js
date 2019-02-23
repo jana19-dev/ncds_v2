@@ -44,7 +44,7 @@ const Topbar = ({ toggleSideBar, title, activePage }) => {
       <Link to='/'>
         <Image src={toggleSideBar ? 'banner_mobile.jpg' : 'banner.jpg'} />
       </Link>
-      <Toolbar style={{ justifyContent: toggleSideBar ? 'left' : 'center', minHeight: 40 }}>
+      <Toolbar style={{ justifyContent: toggleSideBar ? 'left' : 'center', minHeight: 50 }}>
         {toggleSideBar
           ? <>
             <Button onClick={toggleSideBar}><Icon style={{ color: 'white' }}>menu</Icon></Button>
