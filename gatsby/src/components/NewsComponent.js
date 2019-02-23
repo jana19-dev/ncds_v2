@@ -93,6 +93,7 @@ class NewsComponent extends Component {
           <DialogContent style={{ textAlign: 'center', overflowY: 'hidden', padding: '5px 5px' }}>
             {loading && <CircularProgress color='secondary' />}
             <iframe
+              title={link}
               src={link}
               width='100%'
               height='100%'
