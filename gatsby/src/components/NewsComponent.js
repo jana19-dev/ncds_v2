@@ -37,7 +37,7 @@ const StyledCardHeader = withStyles({
 
 const StyledDialog = withStyles({
   paper: {
-    background: 'transparent'
+    background: 'black'
   }
 })(Dialog)
 
@@ -79,6 +79,17 @@ class NewsComponent extends Component {
           </CardContent>
         </StyledCard>
         <StyledDialog open={open} scroll='paper' disableBackdropClick onClose={this.onClose} fullScreen>
+          <DialogActions style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
+            <Button onClick={this.onPrev} variant='contained' color='primary'>
+              Prev
+            </Button>
+            <Button onClick={this.onClose} variant='contained' color='secondary'>
+              Close
+            </Button>
+            <Button onClick={this.onNext} variant='contained' color='primary'>
+              Next
+            </Button>
+          </DialogActions>
           <DialogContent style={{ textAlign: 'center', overflowY: 'hidden', padding: '5px 5px' }}>
             {loading && <CircularProgress color='secondary' />}
             <iframe
@@ -91,17 +102,6 @@ class NewsComponent extends Component {
               marginWidth='0'
             />
           </DialogContent>
-          <DialogActions style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
-            <Button onClick={this.onPrev} variant='contained' color='primary'>
-              Prev
-            </Button>
-            <Button onClick={this.onClose} variant='contained' color='secondary'>
-              Close
-            </Button>
-            <Button onClick={this.onNext} variant='contained' color='primary'>
-              Next
-            </Button>
-          </DialogActions>
         </StyledDialog>
       </div>
     )
