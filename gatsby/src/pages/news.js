@@ -12,7 +12,7 @@ export default class NewsPage extends Component {
         ...props.data.allFeedCineNews.edges,
         ...props.data.allFeedLankasriNews.edges,
         ...props.data.allFeedCanadaNews.edges
-      ],
+      ].sort((a, b) => new Date(b.node.pubDate) - new Date(a.node.pubDate)),
       totalItems: props.data.allFeedJvpNews.edges.length
     }
   }
@@ -46,7 +46,7 @@ export default class NewsPage extends Component {
           gridGap: 20,
           justifyContent: 'center'
         }}>
-          {newsItems.sort((a, b) => new Date(b.node.pubDate) - new Date(a.node.pubDate)).map(({ node }, idx) =>
+          {newsItems.map(({ node }, idx) =>
             <NewsComponent
               key={node.id}
               news={node}
