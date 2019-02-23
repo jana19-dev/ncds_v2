@@ -21,16 +21,6 @@ const Main = styled.div`
   grid-gap: 20px;
   justify-content: center;
 `
-const Form = styled.form`
-  display: grid;
-  padding: 20px;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
-  margin: '0px auto';
-  @media only screen and (max-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-  }
-`
 
 const DonationDetails = styled.div`
   display: grid;
@@ -102,13 +92,20 @@ class DonationPage extends Component {
               <Typography style={{ color: 'white' }} variant='h6'>Scholarships</Typography>
             </DonationCard>
           </DonationDetails>
-          <Form
+          <form
             name='donation'
             method='post'
             action='/donation/'
             data-netlify='true'
             data-netlify-honeypot='bot-field'
             onSubmit={this.handleSubmit}
+            style={{
+              display: 'grid',
+              padding: '20px',
+              gridTemplateColumns: '1fr 1fr',
+              gridGap: 20,
+              justifyItems: 'center'
+            }}
           >
             <input type='hidden' name='form-name' value='donation' />
             <TextField
@@ -148,15 +145,16 @@ class DonationPage extends Component {
               type='submit'
               color='primary'
               disabled={this.props.loading}
+              fullWidth
             >
               Send
               <Icon style={{ marginLeft: 5 }}>save</Icon>
             </Button>
-            <Button variant='contained' color='secondary' type='reset' onClick={this.clearForm}>
+            <Button variant='contained' color='secondary' type='reset' onClick={this.clearForm} fullWidth>
               Clear
               <Icon style={{ marginLeft: 5 }}>cancel</Icon>
             </Button>
-          </Form>
+          </form>
           <Dialog
             open={this.state.responseMessage !== ''}
             onClose={this.clearForm}
