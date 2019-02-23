@@ -88,7 +88,7 @@ class ContactPage extends Component {
 
     return (
       <Layout title='தொடர்புகள்' activePage='/contact'>
-        {/* <Main>
+        <Main>
           <ContactDetails>
             <ContactCard elevation={24}>
               <Icon style={{ fontSize: 65, color: 'white' }}> people </Icon>
@@ -100,7 +100,7 @@ class ContactPage extends Component {
               <Typography style={{ color: 'white' }} variant='h6'>Contact Details</Typography>
               <Typography style={{ color: 'white' }} variant='body2' component='div'>{ReactHtmlParser(members)}</Typography>
             </ContactCard>
-          </ContactDetails> */}
+          </ContactDetails>
           <form
             name='contact'
             method='post'
@@ -175,7 +175,7 @@ class ContactPage extends Component {
               <Button onClick={this.clearForm} variant='contained' autoFocus color='primary'>OK</Button>
             </DialogActions>
           </Dialog>
-        {/* </Main> */}
+        </Main>
       </Layout>
     )
   }
