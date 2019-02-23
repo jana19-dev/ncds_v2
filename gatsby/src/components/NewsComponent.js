@@ -36,12 +36,7 @@ const StyledCardHeader = withStyles({
 })(CardHeader)
 
 const StyledDialog = withStyles({
-  root: {
-    padding: 0,
-    width: '100vw'
-  },
   paper: {
-    height: '80vh',
     background: 'black'
   }
 })(Dialog)
@@ -83,8 +78,8 @@ class NewsComponent extends Component {
             </Typography>
           </CardContent>
         </StyledCard>
-        <StyledDialog open={open} scroll='paper' onClose={this.onClose} fullWidth maxWidth={false}>
-          <DialogContent style={{ textAlign: 'center', overflowY: 'hidden' }}>
+        <StyledDialog open={open} scroll='paper' disableBackdropClick onClose={this.onClose} fullScreen>
+          <DialogContent style={{ textAlign: 'center', overflowY: 'hidden', padding: '5px 5px' }}>
             {loading && <CircularProgress color='secondary' />}
             <iframe
               src={link}
