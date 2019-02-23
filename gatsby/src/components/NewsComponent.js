@@ -37,7 +37,7 @@ const StyledCardHeader = withStyles({
 
 const StyledDialog = withStyles({
   paper: {
-    background: 'black'
+    background: 'transparent'
   }
 })(Dialog)
 
