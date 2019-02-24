@@ -106,7 +106,7 @@ class ContactPage extends Component {
             method='post'
             action='/contact/'
             data-netlify='true'
-            data-netlify-honeypot='bot-field'
+            // data-netlify-honeypot='bot-field'
             onSubmit={this.handleSubmit}
             style={{
               display: 'grid',
@@ -116,7 +116,7 @@ class ContactPage extends Component {
               justifyItems: 'center'
             }}
           >
-            <input type='hidden' name='bot-field' />
+            {/* <input type='hidden' name='bot-field' /> */}
             <input type='hidden' name='form-name' value='contact' />
             <TextField
               label='Name'
