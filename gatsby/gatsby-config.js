@@ -87,6 +87,7 @@ module.exports = {
         display: `minimal-ui`,
         icon: `src/images/favicon.png`
       }
-    }
+    },
+    `gatsby-plugin-offline`
   ]
 }
