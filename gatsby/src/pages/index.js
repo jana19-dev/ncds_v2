@@ -98,7 +98,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout title='நயினாதீவு' activePage='/'>
       <Main>
-        <Desktop>
+        <Desktop implementation='js'>
           {leftAds}
           {leftPics}
           {middlePics}
@@ -106,7 +106,7 @@ const IndexPage = ({ data }) => {
           {rightAds}
         </Desktop>
 
-        <Mobile>
+        <Mobile implementation='js'>
           {middlePics}
           {leftPics}
           {rightPics}

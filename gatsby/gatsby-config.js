@@ -6,8 +6,12 @@ module.exports = {
     siteUrl: `https://nainativucds.org`
   },
   plugins: [
+    `gatsby-plugin-material-ui`,
+    `gatsby-plugin-styled-components`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -15,17 +19,13 @@ module.exports = {
         path: `${__dirname}/src/images`
       }
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
-    `gatsby-plugin-material-ui`,
-    `gatsby-plugin-styled-components`,
     {
       resolve: 'gatsby-source-sanity',
       options: {
         projectId: '8crwkfsj',
         dataset: 'production',
         token: process.env.GATSBY_SANITY_TOKEN,
-        watchMode: true
+        watchMode: false
       }
     },
     {
