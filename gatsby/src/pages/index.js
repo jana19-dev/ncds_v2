@@ -3,9 +3,7 @@ import { graphql } from 'gatsby'
 import { withStyles } from '@material-ui/core/styles'
 import {
   Layout,
-  Image,
-  Desktop,
-  Mobile
+  Image
 } from '../components'
 import {
   Card,
@@ -42,83 +40,99 @@ const StyledCardHeader = withStyles({
   }
 })(CardHeader)
 
-const IndexPage = ({ data }) => {
-  const advertisements = data.allSanityHome.edges[0].node.images
-  const nainativu = data.allSanityHome.edges[1].node.images
-  const announcements = data.allSanityInfo.edges.find(info => info.node.name === 'annoucements').node
+export default class IndexPage extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      sidebarOpen: false,
+      isMobile: false
+    }
+  }
 
-  const leftAds = (
-    <div>
-      <Advertisement><Img fluid={advertisements[0].asset.fluid} /></Advertisement>
-      <Advertisement><Img fluid={advertisements[1].asset.fluid} /></Advertisement>
-    </div>
-  )
+  componentDidMount = () => {
+    const isMobile = window.innerWidth < 768
+    this.setState({ isMobile })
+  }
 
-  const rightAds = (
-    <div>
-      <Advertisement><Img fluid={advertisements[2].asset.fluid} /></Advertisement>
-      <Advertisement><Img fluid={advertisements[3].asset.fluid} /></Advertisement>
-    </div>
-  )
+  render () {
+    const advertisements = this.props.data.allSanityHome.edges[0].node.images
+    const nainativu = this.props.data.allSanityHome.edges[1].node.images
+    const announcements = this.props.data.allSanityInfo.edges.find(info => info.node.name === 'annoucements').node
 
-  const leftPics = (
-    <div style={{ display: 'grid', gridGap: 5 }}>
-      <Img fluid={nainativu[0].asset.fluid} />
-      <Img fluid={nainativu[1].asset.fluid} />
-      <Img fluid={nainativu[2].asset.fluid} />
-      <Img fluid={nainativu[3].asset.fluid} />
-    </div>
-  )
+    const { isMobile } = this.state
 
-  const rightPics = (
-    <div style={{ display: 'grid', gridGap: 5 }}>
-      <Img fluid={nainativu[4].asset.fluid} />
-      <Img fluid={nainativu[5].asset.fluid} />
-      <Img fluid={nainativu[6].asset.fluid} />
-      <Img fluid={nainativu[7].asset.fluid} />
-    </div>
-  )
+    const leftAds = (
+      <div>
+        <Advertisement><Img fluid={advertisements[0].asset.fluid} /></Advertisement>
+        <Advertisement><Img fluid={advertisements[1].asset.fluid} /></Advertisement>
+      </div>
+    )
 
-  const middlePics = (
-    <div>
-      {announcements.description &&
-        <Card style={{ marginBottom: 10 }}>
-          <StyledCardHeader title='Latest Annoucements' />
-          <CardContent style={{ maxHeight: 150, overflowY: 'auto' }}>
-            <Typography component='div'>
-              {ReactHtmlParser(announcements.description)}
-            </Typography>
-          </CardContent>
-        </Card>
-      }
-      <Image src='anthem.png' />
-    </div>
-  )
+    const rightAds = (
+      <div>
+        <Advertisement><Img fluid={advertisements[2].asset.fluid} /></Advertisement>
+        <Advertisement><Img fluid={advertisements[3].asset.fluid} /></Advertisement>
+      </div>
+    )
 
-  return (
-    <Layout title='நயினாதீவு' activePage='/'>
-      <Main>
-        <Desktop implementation='js'>
-          {leftAds}
-          {leftPics}
-          {middlePics}
-          {rightPics}
-          {rightAds}
-        </Desktop>
+    const leftPics = (
+      <div style={{ display: 'grid', gridGap: 5 }}>
+        <Img fluid={nainativu[0].asset.fluid} />
+        <Img fluid={nainativu[1].asset.fluid} />
+        <Img fluid={nainativu[2].asset.fluid} />
+        <Img fluid={nainativu[3].asset.fluid} />
+      </div>
+    )
 
-        <Mobile implementation='js'>
-          {middlePics}
-          {leftPics}
-          {rightPics}
-          {leftAds}
-          {rightAds}
-        </Mobile>
-      </Main>
-    </Layout>
-  )
+    const rightPics = (
+      <div style={{ display: 'grid', gridGap: 5 }}>
+        <Img fluid={nainativu[4].asset.fluid} />
+        <Img fluid={nainativu[5].asset.fluid} />
+        <Img fluid={nainativu[6].asset.fluid} />
+        <Img fluid={nainativu[7].asset.fluid} />
+      </div>
+    )
+
+    const middlePics = (
+      <div>
+        {announcements.description &&
+          <Card style={{ marginBottom: 10 }}>
+            <StyledCardHeader title='Latest Annoucements' />
+            <CardContent style={{ maxHeight: 150, overflowY: 'auto' }}>
+              <Typography component='div'>
+                {ReactHtmlParser(announcements.description)}
+              </Typography>
+            </CardContent>
+          </Card>
+        }
+        <Image src='anthem.png' />
+      </div>
+    )
+
+    return (
+      <Layout title='நயினாதீவு' activePage='/'>
+        <Main>
+          {!isMobile
+            ? <>
+              {leftAds}
+              {leftPics}
+              {middlePics}
+              {rightPics}
+              {rightAds}
+            </>
+            : <>
+              {middlePics}
+              {leftPics}
+              {rightPics}
+              {leftAds}
+              {rightAds}
+            </>
+          }
+        </Main>
+      </Layout>
+    )
+  }
 }
-
-export default IndexPage
 
 export const query = graphql`
   query AllHomeImages {
