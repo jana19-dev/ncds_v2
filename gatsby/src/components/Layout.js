@@ -24,17 +24,21 @@ class Layout extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      sidebarOpen: false
+      sidebarOpen: false,
+      isMobile: false
     }
+  }
+
+  componentDidMount = () => {
+    const isMobile = window.innerWidth < 768
+    this.setState({ isMobile })
   }
 
   toggleSideBar = () => this.setState({ sidebarOpen: true })
 
   render () {
     const { title, activePage, children } = this.props
-    const { sidebarOpen } = this.state
-
-    const isMobile = window.innerWidth < 768
+    const { sidebarOpen, isMobile } = this.state
 
     const padding = isMobile ? '140px 10px 20px 10px' : '220px 10px 20px 10px'
 
