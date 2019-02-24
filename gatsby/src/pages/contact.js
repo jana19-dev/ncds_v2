@@ -116,20 +116,20 @@ class ContactPage extends Component {
               justifyItems: 'center'
             }}
           >
-            <input type='hidden' name='bot-field' />
-            <input type='hidden' name='form-name' value='contact' />
+            <input type='hidden' name='contact' value='contact' />
             <TextField
               label='Name'
+              name='name'
               type='text'
               required
               value={this.state.name}
               onChange={(e) => this.handleTextChange('name', e.target.value)}
               fullWidth
               disabled={this.state.loading}
-              autoFocus
             />
             <TextField
               label='Email'
+              name='email'
               type='email'
               required
               value={this.state.email}
@@ -139,6 +139,7 @@ class ContactPage extends Component {
             />
             <TextField
               label='Message'
+              name='message'
               type='textbox'
               required
               value={this.state.message}
