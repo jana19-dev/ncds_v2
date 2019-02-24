@@ -116,6 +116,7 @@ class ContactPage extends Component {
               justifyItems: 'center'
             }}
           >
+            <input type='hidden' name='bot-field' />
             <input type='hidden' name='form-name' value='contact' />
             <TextField
               label='Name'
