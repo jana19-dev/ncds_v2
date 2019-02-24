@@ -107,19 +107,20 @@ class DonationPage extends Component {
               justifyItems: 'center'
             }}
           >
-            <input type='hidden' name='form-name' value='donation' />
+            <input type='hidden' name='donation' value='donation' />
             <TextField
               label='Name'
+              name='name'
               type='text'
               required
               value={this.state.name}
               onChange={(e) => this.handleTextChange('name', e.target.value)}
               fullWidth
               disabled={this.state.loading}
-              autoFocus
             />
             <TextField
               label='Email'
+              name='email'
               type='email'
               required
               value={this.state.email}
@@ -129,6 +130,7 @@ class DonationPage extends Component {
             />
             <TextField
               label='Message'
+              name='message'
               type='textbox'
               required
               value={this.state.message}
