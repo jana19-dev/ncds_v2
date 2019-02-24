@@ -3,9 +3,7 @@ import { graphql } from 'gatsby'
 import { withStyles } from '@material-ui/core/styles'
 import {
   Layout,
-  Image,
-  Desktop,
-  Mobile
+  Image
 } from '../components'
 import {
   Card,
@@ -95,24 +93,27 @@ const IndexPage = ({ data }) => {
     </div>
   )
 
+  const isMobile = window.innerWidth < 768
+
   return (
     <Layout title='நயினாதீவு' activePage='/'>
       <Main>
-        <Desktop implementation='js'>
-          {leftAds}
-          {leftPics}
-          {middlePics}
-          {rightPics}
-          {rightAds}
-        </Desktop>
-
-        <Mobile implementation='js'>
-          {middlePics}
-          {leftPics}
-          {rightPics}
-          {leftAds}
-          {rightAds}
-        </Mobile>
+        {!isMobile
+          ? <>
+            {leftAds}
+            {leftPics}
+            {middlePics}
+            {rightPics}
+            {rightAds}
+          </>
+          : <>
+            {middlePics}
+            {leftPics}
+            {rightPics}
+            {leftAds}
+            {rightAds}
+          </>
+        }
       </Main>
     </Layout>
   )

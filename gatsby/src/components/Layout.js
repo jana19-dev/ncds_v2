@@ -7,9 +7,7 @@ import {
   SEO,
   Sidebar,
   Topbar,
-  Footer,
-  Desktop,
-  Mobile
+  Footer
 } from '.'
 
 const theme = createMuiTheme({
@@ -36,6 +34,10 @@ class Layout extends React.Component {
     const { title, activePage, children } = this.props
     const { sidebarOpen } = this.state
 
+    const isMobile = window.innerWidth < 768
+
+    const padding = isMobile ? '140px 10px 20px 10px' : '220px 10px 20px 10px'
+
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
@@ -43,21 +45,14 @@ class Layout extends React.Component {
         <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons' />
         <SEO title={title} keywords={[`ncds`, `nainativu`, `nainativu CDS`, `nainativucds.org`]} />
         <div style={{ backgroundPosition: 'center', backgroundSize: 'cover', minHeight: '100vh', minWidth: 400 }}>
-          <Desktop>
-            <Topbar title={title} activePage={activePage} />
-            <div style={{ minHeight: '100vh', padding: '220px 10px 20px 10px' }}>
-              {children}
-            </div>
-            <Footer />
-          </Desktop>
-          <Mobile>
+          {isMobile &&
             <Sidebar activePage={activePage} open={sidebarOpen} toggleSidebar={sidebarOpen => this.setState({ sidebarOpen })} />
-            <Topbar title={title} toggleSideBar={this.toggleSideBar} />
-            <div style={{ minHeight: '100vh', padding: '140px 10px 20px 10px' }}>
-              {children}
-            </div>
-            <Footer />
-          </Mobile>
+          }
+          <Topbar title={title} activePage={activePage} toggleSideBar={isMobile ? this.toggleSideBar : null} />
+          <div style={{ minHeight: '100vh', padding }}>
+            {children}
+          </div>
+          <Footer />
         </div>
       </MuiThemeProvider>
     )
