@@ -87,7 +87,7 @@ class NewsComponent extends Component {
             />
           </CardActionArea>
           <CardContent>
-            <Typography style={{ color: 'white', fontSize: 18, textAlign: 'center' }} variant='body2'>
+            <Typography style={{ color: 'white', fontSize: 18, textAlign: 'center' }} variant='body1'>
               {title}
             </Typography>
           </CardContent>

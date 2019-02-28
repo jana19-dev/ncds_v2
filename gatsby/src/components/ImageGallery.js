@@ -2,10 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Lightbox from 'react-image-lightbox'
 import 'react-image-lightbox/style.css'
-import {
-  IconButton,
-  Icon
-} from '@material-ui/core'
+import IconButton from '@material-ui/core/IconButton'
+import ReactHtmlParser from 'react-html-parser'
 
 class ImageGallery extends Component {
   constructor (props) {
@@ -35,14 +33,14 @@ class ImageGallery extends Component {
   }
 
   render () {
-    const { images } = this.props
+    const { images, title, caption } = this.props
     const { photoIndex } = this.state
 
     const isSingleImage = images.length === 1
 
     const slideShowIcon = (
       <IconButton aria-label='Play/Pause' onClick={this.toggleSlideShow} style={{ color: 'white' }}>
-        <Icon> {this.state.slideShow ? 'pause' : 'play_arrow' } </Icon>
+        {this.state.slideShow ? <span role='img' aria-label='pause'>&#x270B;</span> : <span role='img' aria-label='play'>&#x27A4;</span> }
       </IconButton>
     )
 
@@ -56,6 +54,8 @@ class ImageGallery extends Component {
         onMoveNextRequest={() => this.setState({ photoIndex: (photoIndex + 1) % images.length })}
         toolbarButtons={!isSingleImage ? [slideShowIcon] : []}
         reactModalStyle={{ overlay: { zIndex: 1100 } }}
+        imageTitle={title}
+        imageCaption={ReactHtmlParser(caption)}
       />
     )
   }
@@ -63,7 +63,9 @@ class ImageGallery extends Component {
 
 ImageGallery.defaultProps = {
   slideTimeout: 5000,
-  startIndex: 0
+  startIndex: 0,
+  title: '',
+  caption: ''
 }
 
 ImageGallery.propTypes = {

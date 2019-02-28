@@ -24,7 +24,7 @@ export default class GalleryPage extends Component {
   render () {
     const { edges: galleries } = this.props.data.allSanityGallery
     let { edges: tags } = this.props.data.allSanityGalleryTag
-    tags = [{ node: { id: 'showAll', name: 'Show All' } }, ...tags]
+    tags = [{ node: { _id: 'showAll', name: 'Show All' } }, ...tags]
     const { activeFilter } = this.state
 
     return (
@@ -38,7 +38,7 @@ export default class GalleryPage extends Component {
         }}>
           {tags.map(({ node }) =>
             <Chip
-              key={node.id}
+              key={node._id}
               label={node.name}
               clickable
               onClick={() => this.setState({ activeFilter: node.name })}
@@ -62,7 +62,7 @@ export default class GalleryPage extends Component {
                 .includes(activeFilter)
             )
             .map(({ node }) =>
-              <CardComponent key={node.id} content={node} />
+              <CardComponent key={node._id} content={node} />
             )
           }
         </div>
@@ -81,7 +81,7 @@ export const query = graphql`
     ) {
       edges {
         node {
-          id,
+          _id,
           title,
           date (formatString: "MMMM Do, YYYY"),
           description,
@@ -107,7 +107,7 @@ export const query = graphql`
     ) {
       edges {
         node {
-          id,
+          _id,
           name
         }
       }
