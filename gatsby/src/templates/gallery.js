@@ -3,8 +3,6 @@ import { Layout, ImageGallery } from '../components'
 import { navigate } from 'gatsby'
 
 const GalleryDetails = ({ pageContext, location }) => {
-  const { index = 0 } = location.state
-
   const {
     title,
     name,
@@ -22,7 +20,7 @@ const GalleryDetails = ({ pageContext, location }) => {
         images={imageURLs}
         onClose={() => navigate(onClosePath)}
         slideTimeout={5000}
-        startIndex={index}
+        startIndex={location.state ? location.state.index : 0}
         title={title || name}
         caption={description}
       />
