@@ -55,7 +55,7 @@ export default class EventsPage extends Component {
           justifyContent: 'center'
         }}>
           {events.filter(({ node }) => this.canShow(node.endDate)).map(({ node }) =>
-            <CardComponent key={node.id} content={node} />
+            <CardComponent key={node._id} content={node} />
           )}
         </div>
       </Layout>
@@ -73,7 +73,7 @@ export const query = graphql`
     ) {
       edges {
         node {
-          id,
+          _id,
           title,
           endDate: endTime,
           startDate: startTime (formatString: "dddd, MMMM Do YYYY"),

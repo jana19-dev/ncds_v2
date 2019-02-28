@@ -14,7 +14,7 @@ const ObituariesPage = ({ data }) => {
         justifyContent: 'center'
       }}>
         {obituaries.map(({ node }) =>
-          <CardComponent key={node.id} content={node} />
+          <CardComponent key={node._id} content={node} />
         )}
       </div>
     </Layout>
@@ -38,7 +38,7 @@ export const query = graphql`
     ) {
       edges {
         node {
-          id,
+          _id,
           name,
           birthDate (formatString: "MMMM Do, YYYY"),
           deathDate (formatString: "MMMM Do, YYYY"),

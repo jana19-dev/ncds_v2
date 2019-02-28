@@ -14,7 +14,7 @@ const PublicationsPage = ({ data }) => {
         justifyContent: 'center'
       }}>
         {publications.map(({ node }) =>
-          <CardComponent key={node.id} content={node} maxSlideShow={2} />
+          <CardComponent key={node._id} content={node} maxSlideShow={2} />
         )}
       </div>
     </Layout>
@@ -33,7 +33,7 @@ export const query = graphql`
     ) {
       edges {
         node {
-          id,
+          _id,
           title,
           date (formatString: "MMMM YYYY"),
           description,

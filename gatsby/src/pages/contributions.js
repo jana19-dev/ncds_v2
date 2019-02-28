@@ -14,7 +14,7 @@ const ContributionsPage = ({ data }) => {
         justifyContent: 'center'
       }}>
         {contributions.map(({ node }) =>
-          <CardComponent key={node.id} content={node} />
+          <CardComponent key={node._id} content={node} />
         )}
       </div>
     </Layout>
@@ -33,7 +33,7 @@ export const query = graphql`
     ) {
       edges {
         node {
-          id,
+          _id,
           title,
           date (formatString: "MMMM Do, YYYY"),
           description,

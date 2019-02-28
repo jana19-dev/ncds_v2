@@ -9,10 +9,10 @@ import {
   Typography,
   LinearProgress
 } from '@material-ui/core'
-import { ImageGallery } from '.'
 import ReactHtmlParser from 'react-html-parser'
 import { teal } from '@material-ui/core/colors'
 import Img from 'gatsby-image'
+import { navigate } from 'gatsby'
 
 const StyledCard = withStyles({
   root: {
@@ -39,7 +39,6 @@ class CardComponent extends Component {
     super(props)
     this.state = {
       isCardExpanded: false,
-      isGalleryOpen: false,
       index: 0,
       completed: 10
     }
@@ -74,6 +73,7 @@ class CardComponent extends Component {
 
   render () {
     const {
+      _id,
       title,
       name,
       date,
@@ -87,7 +87,7 @@ class CardComponent extends Component {
       deathDate
     } = this.props.content
 
-    const { isGalleryOpen, index, completed } = this.state
+    const { index, completed } = this.state
 
     const imageURLs = images ? images.map(image => image.asset.url) : [image.asset.url]
 
@@ -98,7 +98,7 @@ class CardComponent extends Component {
       <StyledCard>
         <StyledCardHeader title={title || name} />
         {slideShow && <LinearProgress variant='determinate' color='secondary' value={completed} />}
-        <CardActionArea onClick={() => this.setState({ isGalleryOpen: true })}>
+        <CardActionArea onClick={() => navigate(_id, { state: { index } })}>
           <Img fixed={cardMediaImage} />
         </CardActionArea>
         <CardContent>
@@ -129,15 +129,6 @@ class CardComponent extends Component {
             {ReactHtmlParser(description)}
           </Typography>
         </CardContent>
-
-        {isGalleryOpen && (
-          <ImageGallery
-            images={imageURLs}
-            onClose={() => this.setState({ isGalleryOpen: false })}
-            slideTimeout={5000}
-            startIndex={index}
-          />
-        )}
       </StyledCard>
     )
   }
