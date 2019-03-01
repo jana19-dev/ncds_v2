@@ -12,6 +12,15 @@ const obituary = {
       validation: Rule => Rule.required()
     },
     {
+      title: 'URL Slug',
+      name: 'slug',
+      type: 'slug',
+      options: {
+        source: 'name'
+      },
+      validation: Rule => Rule.required()
+    },
+    {
       title: 'Expired / Active',
       name: 'active',
       type: 'boolean'

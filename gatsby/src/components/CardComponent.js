@@ -29,7 +29,6 @@ const StyledCardHeader = withStyles({
     color: 'white',
     textAlign: 'center',
     fontSize: 16,
-    // fontWeight: 'bold',
     height: 25
   }
 })(CardHeader)
@@ -73,7 +72,7 @@ class CardComponent extends Component {
 
   render () {
     const {
-      _id,
+      slug,
       title,
       name,
       date,
@@ -98,7 +97,7 @@ class CardComponent extends Component {
       <StyledCard>
         <StyledCardHeader title={title || name} />
         {slideShow && <LinearProgress variant='determinate' color='secondary' value={completed} />}
-        <CardActionArea onClick={() => navigate(_id, { state: { index } })}>
+        <CardActionArea onClick={() => navigate(slug.current, { state: { index } })}>
           <Img fixed={cardMediaImage} />
         </CardActionArea>
         <CardContent>

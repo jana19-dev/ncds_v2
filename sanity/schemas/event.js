@@ -12,6 +12,15 @@ const event = {
       validation: Rule => Rule.required()
     },
     {
+      title: 'URL Slug',
+      name: 'slug',
+      type: 'slug',
+      options: {
+        source: 'title'
+      },
+      validation: Rule => Rule.required()
+    },
+    {
       title: 'Start Time',
       name: 'startTime',
       type: 'datetime',

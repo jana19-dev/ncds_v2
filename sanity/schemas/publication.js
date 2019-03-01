@@ -12,6 +12,15 @@ const publication = {
       validation: Rule => Rule.required()
     },
     {
+      title: 'URL Slug',
+      name: 'slug',
+      type: 'slug',
+      options: {
+        source: 'title'
+      },
+      validation: Rule => Rule.required()
+    },
+    {
       title: 'Publication Date',
       name: 'date',
       type: 'date',

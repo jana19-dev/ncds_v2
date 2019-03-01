@@ -11,6 +11,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             edges {
               node {
                 _id,
+                slug {
+                  current
+                },
                 title,
                 description,
                 images {
@@ -25,6 +28,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             edges {
               node {
                 _id,
+                slug {
+                  current
+                },
                 title,
                 description,
                 images {
@@ -39,6 +45,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             edges {
               node {
                 _id,
+                slug {
+                  current
+                },
                 title,
                 description,
                 images {
@@ -53,6 +62,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             edges {
               node {
                 _id,
+                slug {
+                  current
+                },
                 title,
                 description,
                 image {
@@ -67,6 +79,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             edges {
               node {
                 _id,
+                slug {
+                  current
+                },
                 name,
                 description,
                 image {
@@ -83,7 +98,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         if (result.errors) reject(result.errors)
         result.data.allSanityContribution.edges.forEach(({ node }) => {
           createPage({
-            path: `${node._id}`,
+            path: `${node.slug.current}`,
             component: galleryDetailsTemplate,
             context: {
               ...node,
@@ -93,7 +108,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         })
         result.data.allSanityPublication.edges.forEach(({ node }) => {
           createPage({
-            path: `${node._id}`,
+            path: `${node.slug.current}`,
             component: galleryDetailsTemplate,
             context: {
               ...node,
@@ -103,7 +118,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         })
         result.data.allSanityGallery.edges.forEach(({ node }) => {
           createPage({
-            path: `${node._id}`,
+            path: `${node.slug.current}`,
             component: galleryDetailsTemplate,
             context: {
               ...node,
@@ -113,7 +128,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         })
         result.data.allSanityEvent.edges.forEach(({ node }) => {
           createPage({
-            path: `${node._id}`,
+            path: `${node.slug.current}`,
             component: galleryDetailsTemplate,
             context: {
               ...node,
@@ -123,7 +138,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         })
         result.data.allSanityObituary.edges.forEach(({ node }) => {
           createPage({
-            path: `${node._id}`,
+            path: `${node.slug.current}`,
             component: galleryDetailsTemplate,
             context: {
               ...node,
