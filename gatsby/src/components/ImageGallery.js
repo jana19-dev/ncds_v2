@@ -10,37 +10,46 @@ class ImageGallery extends Component {
     super(props)
     this.state = {
       photoIndex: props.startIndex,
-      slideShow: false
+      slideShow: false,
+      timer: props.slideTimeout / 1000
     }
   }
 
   toggleSlideShow = () => {
     if (this.state.slideShow) {
       clearInterval(this.interval)
+      clearInterval(this.timer)
+      this.setState({ slideShow: !this.state.slideShow, timer: this.props.slideTimeout / 1000 })
     } else {
       this.interval = setInterval(this.showNextSlide, this.props.slideTimeout)
+      this.timer = setInterval(() => {
+        this.setState({ timer: this.state.timer - 1 })
+      }, 1000)
     }
     this.setState({ slideShow: !this.state.slideShow })
   }
 
   showNextSlide = () => {
-    document.getElementsByClassName('ril-next-button ril__navButtons ril__navButtonNext')[0].click()
+    this.setState({ timer: (this.props.slideTimeout / 1000) + 1 }, () => {
+      document.getElementsByClassName('ril-next-button ril__navButtons ril__navButtonNext')[0].click()
+    })
   }
 
   onClose = () => {
     clearInterval(this.interval)
-    this.setState({ photoIndex: 0, slideShow: false }, () => this.props.onClose())
+    clearInterval(this.timer)
+    this.setState({ photoIndex: 0, slideShow: false, timer: this.props.slideTimeout / 1000 }, () => this.props.onClose())
   }
 
   render () {
     const { images, title, caption } = this.props
-    const { photoIndex } = this.state
+    const { photoIndex, timer } = this.state
 
     const isSingleImage = images.length === 1
 
     const slideShowIcon = (
       <IconButton aria-label='Play/Pause' onClick={this.toggleSlideShow} style={{ color: 'white' }}>
-        {this.state.slideShow ? <span role='img' aria-label='pause'>&#x270B;</span> : <span role='img' aria-label='play'>&#x27A4;</span> }
+        {this.state.slideShow ? <span role='img' aria-label='pause'>{timer} &#x270B;</span> : <span role='img' aria-label='play'>&#x27A4;</span> }
       </IconButton>
     )
 

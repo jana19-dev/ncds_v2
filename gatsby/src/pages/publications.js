@@ -34,6 +34,9 @@ export const query = graphql`
       edges {
         node {
           _id,
+          slug {
+            current
+          },
           title,
           date (formatString: "MMMM YYYY"),
           description,

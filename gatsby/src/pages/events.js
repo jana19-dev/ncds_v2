@@ -74,6 +74,9 @@ export const query = graphql`
       edges {
         node {
           _id,
+          slug {
+            current
+          },
           title,
           endDate: endTime,
           startDate: startTime (formatString: "dddd, MMMM Do YYYY"),
