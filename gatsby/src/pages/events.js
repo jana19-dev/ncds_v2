@@ -15,8 +15,8 @@ export default class EventsPage extends Component {
   canShow = (eventDate) => {
     const { activeFilter } = this.state
     if (activeFilter !== 'Show All') {
-      if ((activeFilter === 'Upcoming Events') && new Date(eventDate).getDate() < new Date().getDate()) return false
-      if ((activeFilter === 'Past Events') && new Date(eventDate).getDate() >= new Date().getDate()) return false
+      if ((activeFilter === 'Upcoming Events') && new Date(eventDate) <= new Date()) return false
+      if ((activeFilter === 'Past Events') && new Date(eventDate) >= new Date()) return false
     }
     return true
   }
